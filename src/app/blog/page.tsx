@@ -1,9 +1,9 @@
-// import Navbar from "../../components/Navbar";
+import Navbar from "../components/Navbar";
 
 export default function Blog() {
   return (
     <main>
-      {/* <Navbar /> */}
+      <Navbar />
       <h1>Blog</h1>
       <ul>
         <li>Post 1: Getting started with Next.js</li>

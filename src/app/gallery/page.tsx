@@ -1,9 +1,9 @@
-// import Navbar from "../../components/Navbar";
+import Navbar from "../components/Navbar";
 
 export default function Gallery() {
   return (
     <main>
-      {/* <Navbar /> */}
+      <Navbar />
       <h1>Gallery</h1>
       <p>Some pictures of our collaboration journey 📸</p>
       <ul>
