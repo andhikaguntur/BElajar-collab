@@ -2,9 +2,12 @@
 
 import { useState, useEffect } from "react";
 
+import { useSession, signOut } from "next-auth/react";
+
 export default function Home() {
   const [todos, setTodos] = useState<any[]>([]);
   const [title, setTitle] = useState("");
+  const { data: session } = useSession();
 
   async function loadTodos() {
     const res = await fetch("/api/todos");
@@ -29,6 +32,21 @@ export default function Home() {
 
   return (
     <main className="p-6">
+
+     {session ? (
+        <>
+          <h1 className="text-xl font-bold">Halo, {session.user?.name}</h1>
+          <button
+            onClick={() => signOut({ callbackUrl: "/login" })}
+            className="mt-4 px-4 py-2 bg-red-500 text-white rounded"
+          >
+            Logout
+          </button>
+        </>
+      ) : (
+        <h1 className="text-xl font-bold">Halo, silakan login dulu</h1>
+      )}
+
       <h1 className="text-2xl font-bold mb-4">Todo List</h1>
       <div className="mb-4">
         <input

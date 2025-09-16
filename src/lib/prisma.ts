@@ -1,6 +1,15 @@
-import { PrismaClient } from "@prisma/client/edge";
-import { withAccelerate } from "@prisma/extension-accelerate";
+// lib/prisma.ts
+import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient().$extends(withAccelerate());
+declare global {
+  // eslint-disable-next-line no-var
+  var prisma: PrismaClient | undefined;
+}
 
-export default prisma;
+export const prisma =
+  global.prisma ||
+  new PrismaClient({
+    log: ["query"],
+  });
+
+if (process.env.NODE_ENV !== "production") global.prisma = prisma;
